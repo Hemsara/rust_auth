@@ -1,11 +1,11 @@
-use axum::Router;
 use crate::state::AppState;
+use axum::Router;
 
-mod health;
 mod auth;
+mod health;
 
-pub use health::health_routes;
 pub use auth::auth_routes;
+pub use health::health_routes;
 
 pub fn routes() -> Router<AppState> {
     Router::new()
