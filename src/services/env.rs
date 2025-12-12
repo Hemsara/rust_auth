@@ -6,6 +6,7 @@ pub struct Env {
     pub database_url: String,
     pub server_port: u16,
     pub jwt_secret: String,
+    pub redis_url: String,
 }
 
 #[derive(Debug)]
@@ -41,10 +42,13 @@ impl Env {
             .parse::<u16>()
             .map_err(|_| EnvError::InvalidVar("PORT".to_string()))?;
 
+        let redis_url = get_var("REDIS_URL")?;
+
         Ok(Self {
             database_url,
             server_port,
             jwt_secret,
+            redis_url,
         })
     }
 }

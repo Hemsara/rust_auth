@@ -1,5 +1,6 @@
 use crate::routes;
 use crate::services::env::Env;
+use crate::services::redis::init;
 use crate::state::AppState;
 use axum::Router;
 
@@ -10,6 +11,8 @@ pub async fn create_app() -> Router {
         .await
         .expect("Failed to connect to the database");
 
-    let state = AppState::new(db, env);
+    let redis = init(&env.redis_url);
+
+    let state = AppState::new(db, env, redis);
     routes::routes().with_state(state)
 }
