@@ -1,0 +1,14 @@
+type: workspace
+model: workspace
+id: wk_syyiMtjW3b
+createdAt: 2025-12-12T23:14:02.731897
+updatedAt: 2025-12-12T23:14:02.731898
+authentication: {}
+authenticationType: null
+description: ''
+headers: []
+name: rust-auth
+encryptionKeyChallenge: null
+settingValidateCertificates: true
+settingFollowRedirects: true
+settingRequestTimeout: 0

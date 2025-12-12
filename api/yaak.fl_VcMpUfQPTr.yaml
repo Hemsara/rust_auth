@@ -1,0 +1,13 @@
+type: folder
+model: folder
+id: fl_VcMpUfQPTr
+createdAt: 2025-12-12T23:14:22.274101
+updatedAt: 2025-12-12T23:14:44.654025
+workspaceId: wk_syyiMtjW3b
+folderId: null
+authentication: {}
+authenticationType: null
+description: ''
+headers: []
+name: Auth
+sortPriority: 0.0
