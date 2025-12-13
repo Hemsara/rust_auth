@@ -7,6 +7,8 @@ pub struct Env {
     pub server_port: u16,
     pub jwt_secret: String,
     pub redis_url: String,
+    pub jwt_expiration_days: String,
+    pub auth_session_key_prefix: String,
 }
 
 #[derive(Debug)]
@@ -43,12 +45,16 @@ impl Env {
             .map_err(|_| EnvError::InvalidVar("PORT".to_string()))?;
 
         let redis_url = get_var("REDIS_URL")?;
+        let jwt_expiration_days = get_var("JWT_EXPIRATION_DAYS")?;
+        let auth_session_key_prefix = get_var("AUTH_SESSION_KEY_PREFIX")?;
 
         Ok(Self {
             database_url,
             server_port,
             jwt_secret,
             redis_url,
+            jwt_expiration_days,
+            auth_session_key_prefix,
         })
     }
 }

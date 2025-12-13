@@ -1,5 +1,6 @@
 use axum::response::IntoResponse;
 use axum::{extract::State, http::StatusCode, Json};
+use redis::Commands;
 use sea_orm::QueryFilter;
 use sea_orm::{ColumnTrait, EntityTrait};
 
@@ -21,7 +22,6 @@ pub struct LoginRequest {
 #[derive(Debug, Deserialize)]
 pub struct RegisterRequest {
     pub email: String,
-    pub username: String,
     pub password: String,
 }
 
@@ -54,6 +54,15 @@ pub async fn login(
     }
 
     let token = state.jwt.generate_token(&user.id.to_string()).unwrap();
+
+    let mut conn = match state.redis.get_connection() {
+        Ok(c) => c,
+        Err(_) => {
+            return response::error(StatusCode::INTERNAL_SERVER_ERROR, "Redis unavailable");
+        }
+    };
+    let key: String = format!("auth_token:{}", user.id);
+    let _: () = conn.set_ex(&key, &token, 3600).unwrap();
 
     response::ok(token)
 }
@@ -93,7 +102,6 @@ pub async fn register(
     if res.is_err() {
         return response::error(StatusCode::INTERNAL_SERVER_ERROR, "Failed to create user");
     }
-
 
     response::ok("User registered successfully")
 }

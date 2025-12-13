@@ -4,6 +4,7 @@ mod routes;
 mod services;
 mod state;
 mod entities;
+mod middleware;
 
 use crate::services::env::Env;
 

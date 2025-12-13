@@ -18,5 +18,5 @@ pub async fn create_app() -> Router {
 
 
     let state = AppState::new(db, env, redis, jwt);
-    routes::routes().with_state(state)
+    routes::routes(state)
 }
