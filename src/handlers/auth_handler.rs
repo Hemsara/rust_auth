@@ -61,7 +61,8 @@ pub async fn login(
             return response::error(StatusCode::INTERNAL_SERVER_ERROR, "Redis unavailable");
         }
     };
-    let key: String = format!("auth_token:{}", user.id);
+    let auth_prefix = &state.env.auth_session_key_prefix;
+    let key: String = format!("{}:{}", auth_prefix, user.id);
     let _: () = conn.set_ex(&key, &token, 3600).unwrap();
 
     response::ok(token)

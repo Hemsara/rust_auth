@@ -14,7 +14,7 @@ pub async fn create_app() -> Router {
         .expect("Failed to connect to the database");
 
     let redis = init(&env.redis_url);
-    let jwt = JwtService::new(env.jwt_secret.clone());
+    let jwt = JwtService::new(env.jwt_secret.clone() , env.jwt_expiration_days);
 
 
     let state = AppState::new(db, env, redis, jwt);

@@ -28,19 +28,16 @@ impl std::error::Error for AuthError {}
 #[derive(Debug, Clone)]
 pub struct JwtService {
     secret: String,
+    expiration_days: i64,
 }
 
 impl JwtService {
-    pub fn new(jwt_secret: String) -> Self {
-        Self { secret: jwt_secret }
+    pub fn new(jwt_secret: String , expiration_days: i64) -> Self {
+        Self { secret: jwt_secret, expiration_days }
     }
 
     pub fn generate_token(&self, user_id: &str) -> Result<String, AuthError> {
-        let expiration = Utc::now()
-            .checked_add_signed(Duration::hours(24))
-            .expect("valid timestamp")
-            .timestamp();
-
+        let expiration =  (Utc::now() + Duration::days(self.expiration_days)).timestamp();
         let claims = Claims {
             sub: user_id.to_owned(),
             exp: expiration,

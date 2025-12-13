@@ -35,8 +35,9 @@ pub async fn auth_middleware(
         .redis
         .get_connection()
         .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
+    let auth_prefix = &state.env.auth_session_key_prefix;
 
-    let key = "auth_token:".to_string() + &user_id.sub;
+    let key = format!("{}:{}", auth_prefix, user_id.sub);
     let exists: bool = conn.exists(key).unwrap_or(false);
     if !exists {
         return Ok(response::error(StatusCode::UNAUTHORIZED, "Session expired"));
