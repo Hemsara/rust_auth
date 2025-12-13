@@ -1,4 +1,40 @@
-/target
+# ---- Rust ----
+/target/
+**/*.rs.bk
+Cargo.lock
 .claude
-.DS_Store
+
+# ---- Environment ----
 .env
+.env.*
+!.env.example
+
+# ---- IDEs ----
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ---- OS ----
+.DS_Store
+Thumbs.db
+
+# ---- Logs ----
+*.log
+
+# ---- Database / ORM ----
+sea-orm-cli.log
+
+# ---- Redis ----
+dump.rdb
+
+# ---- Migration artifacts ----
+migration/target/
+
+# ---- Coverage / profiling ----
+*.profraw
+*.profdata
+
+# ---- Temporary files ----
+tmp/
+migration/README.md
