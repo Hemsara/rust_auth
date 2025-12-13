@@ -6,5 +6,7 @@ use axum::{
 };
 
 pub fn auth_routes() -> Router<AppState> {
-    Router::new().route("/login", post(auth_handler::login))
+    Router::new()
+        .route("/login", post(auth_handler::login))
+        .route("/register", post(auth_handler::register))
 }

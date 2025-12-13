@@ -1,0 +1,28 @@
+type: http_request
+model: http_request
+id: rq_qDfAut3cNZ
+createdAt: 2025-12-13T22:03:29.433196
+updatedAt: 2025-12-13T22:04:02.534588
+workspaceId: wk_syyiMtjW3b
+folderId: fl_VcMpUfQPTr
+authentication: {}
+authenticationType: null
+body:
+  text: |-
+    {
+      "email"  : "vehan@mail.com",
+      "password" : "ed",
+      "username" :"usere"
+    }
+bodyType: application/json
+description: ''
+headers:
+- enabled: true
+  name: Content-Type
+  value: application/json
+  id: KETvkvWQRd
+method: POST
+name: Register
+sortPriority: 0.001
+url: ${[ baseURL ]}/auth/register
+urlParameters: []
